@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AeroSTEM Innovation Challenge</title>
+<style>
+  :root{
+    --navy:#003371;      /* GFD primary */
+    --navy-deep:#002850;
+    --red:#b1171d;       /* GFD accent */
+    --grey:#898b8e;      /* GFD neutral */
+    --grey-soft:#eef1f5;
+    --navy-soft:#e6edf5;
+    --ink:#17233b;
+    --ink-soft:#4a5568;
+    --paper:#ffffff;
+    --line:#d3dae4;
+    --focus:#003371;
+    --radius:14px;
+    --maxw:1080px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);background:#f5f7fa;line-height:1.6;font-size:18px;letter-spacing:.01em}
+  a{color:var(--navy)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+  /* GFD brand bar with school logo */
+  .brandbar{background:#fff;border-bottom:3px solid var(--red)}
+  .brandbar .wrap{display:flex;align-items:center;padding:12px 20px}
+  .brandbar img.logo{height:54px;width:auto;display:block}
+
+  /* Hero */
+  header.site{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;padding:30px 0 26px}
+  header.site h1{margin:0 0 6px;font-size:2rem;line-height:1.2}
+  header.site .tag{margin:0;color:#d6e0ef;font-size:1.05rem}
+  .sdg-badge{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:#fff;color:var(--navy);font-weight:700;padding:8px 14px;border-radius:999px;font-size:.95rem}
+  .sdg-badge .dot{width:12px;height:12px;border-radius:50%;background:var(--red)}
+
+  .challenge{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:22px 0}
+  .challenge h2{margin:0 0 8px;font-size:1.2rem;color:var(--navy)}
+  .challenge p{margin:.4em 0}
+
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0;padding:0}
+  .tab{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:10px 16px;border-radius:999px;font-size:1rem;font-weight:600;cursor:pointer}
+  .tab[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .tab:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  .tab .yrs{display:block;font-weight:400;font-size:.78rem;opacity:.85}
+
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin:14px 0 40px}
+  .panel[hidden]{display:none}
+  .panel h2{margin-top:0;color:var(--navy)}
+  .panel .brief{background:var(--navy-soft);border-left:6px solid var(--navy);padding:14px 18px;border-radius:10px;margin:14px 0 24px}
+  .panel .brief h3{margin:0 0 6px;font-size:1.05rem}
+
+  .step-nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0 0 14px;border-bottom:2px solid var(--line)}
+  .step-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:8px 12px;font-size:.95rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px}
+  .step-btn .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--navy-soft);color:var(--navy);font-size:.8rem;font-weight:700}
+  .step-btn[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .step-btn[aria-selected="true"] .num{background:#fff;color:var(--navy)}
+  .step-btn:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+  .step-panel[hidden]{display:none}
+  .step-panel h3{margin:.2em 0 .4em;color:var(--navy)}
+  .step-panel .kids{font-size:1.05rem}
+  .do-list{margin:.4em 0}
+  .success{background:var(--navy-soft);border-left:6px solid var(--navy);border-radius:10px;padding:10px 14px;margin:14px 0}
+  .success::before{content:"Success check";display:block;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:2px}
+  .teacher{background:#fbecec;border:1px dashed var(--red);border-radius:10px;padding:10px 14px;margin:14px 0 4px;font-size:.95rem}
+  .teacher::before{content:"Teacher note";display:block;font-weight:700;color:var(--red);font-size:.85rem;margin-bottom:2px}
+
+  footer.site{color:var(--ink-soft);font-size:.9rem;padding:26px 0 40px;text-align:center}
+
+  @media (max-width:560px){body{font-size:17px}header.site h1{font-size:1.6rem}.brandbar img.logo{height:44px}}
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="brandbar">
+  <div class="wrap">
+    <img class="logo" src="GFDlogo.png" alt="GEMS Founders School Dubai South">
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <h1>AeroSTEM Innovation Challenge</h1>
+    <p class="tag">Clean Power Flight: designing cleaner ways to power the aircraft of the future</p>
+    <span class="sdg-badge"><span class="dot" aria-hidden="true"></span>Linked to SDG 7: Affordable and Clean Energy</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="challenge" aria-labelledby="challenge-h">
+    <h2 id="challenge-h">Our whole-school challenge</h2>
+    <p>Aeroplanes help us travel and connect, but most planes today burn fuel that pollutes the air we all breathe. Across the school we are asking one big question: <strong>how might we power flight in cleaner ways, so the air stays healthy for everyone?</strong></p>
+    <p>Every year group works on this together at their own level. You will follow the same design journey that
+      real engineers use: Define, Ideate, Prototype, Test, Iterate, and then Showcase your idea.</p>
+  </section>
+
+  <div class="tabs" role="tablist" aria-label="Choose your year group">
+    <button class="tab" role="tab" id="tab-ks1" aria-controls="p-ks1" aria-selected="true" tabindex="0">KS1 <span class="yrs">Years 1 to 2</span></button>
+    <button class="tab" role="tab" id="tab-lks2" aria-controls="p-lks2" aria-selected="false" tabindex="-1">Lower KS2 <span class="yrs">Years 3 to 4</span></button>
+    <button class="tab" role="tab" id="tab-uks2" aria-controls="p-uks2" aria-selected="false" tabindex="-1">Upper KS2 <span class="yrs">Years 5 to 6</span></button>
+    <button class="tab" role="tab" id="tab-ks3" aria-controls="p-ks3" aria-selected="false" tabindex="-1">KS3 <span class="yrs">Years 7 to 9</span></button>
+    <button class="tab" role="tab" id="tab-ks4" aria-controls="p-ks4" aria-selected="false" tabindex="-1">KS4 <span class="yrs">Years 10 to 11</span></button>
+  </div>
+
+  <section class="panel" id="p-ks1" role="tabpanel" aria-labelledby="tab-ks1" tabindex="0">
+    <h2>KS1 (Years 1 to 2)</h2>
+    <div class="brief">
+      <h3>Your project</h3>
+      <p>You are a plane designer. Design a <strong>Clean Sky Plane</strong> that flies without making dirty smoke.</p>
+    </div>
+    <div class="step-nav" role="tablist" aria-label="Design journey for KS1">
+      <button class="step-btn" role="tab" aria-selected="true" aria-controls="ks1-s1" id="ks1-t1" tabindex="0"><span class="num">1</span>Look and Think</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks1-s2" id="ks1-t2" tabindex="-1"><span class="num">2</span>Dream Up Ideas</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks1-s3" id="ks1-t3" tabindex="-1"><span class="num">3</span>Make It</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks1-s4" id="ks1-t4" tabindex="-1"><span class="num">4</span>Try It</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks1-s5" id="ks1-t5" tabindex="-1"><span class="num">5</span>Make It Better</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks1-s6" id="ks1-t6" tabindex="-1"><span class="num">6</span>Show It</button>
+    </div>
+    <div class="step-panel" id="ks1-s1" role="tabpanel" aria-labelledby="ks1-t1" tabindex="0">
+      <h3>Look and Think</h3>
+      <p class="kids">Some planes make dirty smoke that is not good for the air we breathe. Think about how a plane could be clean instead.</p>
+      <ul class="do-list">
+        <li>Look at pictures of planes and talk about clean air and dirty air.</li>
+        <li>Say who is helped when the air is clean (all of us, animals and plants).</li>
+      </ul>
+      <p class="success">You have finished this step when you can say why clean air matters.</p>
+      <p class="teacher">Whole-class talk with picture prompts. Partner stem: Clean air helps...</p>
+    </div>
+    <div class="step-panel" id="ks1-s2" role="tabpanel" aria-labelledby="ks1-t2" tabindex="0" hidden>
+      <h3>Dream Up Ideas</h3>
+      <p class="kids">Think of lots of ways a plane could fly clean. No idea is too silly!</p>
+      <ul class="do-list">
+        <li>Draw or say as many clean plane ideas as you can (sun power, wind, a kite plane).</li>
+        <li>Pick your favourite idea to make.</li>
+      </ul>
+      <p class="success">You have finished this step when you have chosen one idea to make.</p>
+      <p class="teacher">Celebrate quantity. Scribe ideas for children who prefer to talk.</p>
+    </div>
+    <div class="step-panel" id="ks1-s3" role="tabpanel" aria-labelledby="ks1-t3" tabindex="0" hidden>
+      <h3>Make It</h3>
+      <p class="kids">Make your Clean Sky Plane. You can use a drawing or junk materials.</p>
+      <ul class="do-list">
+        <li>Make a model or a colourful labelled drawing of your clean plane.</li>
+        <li>Point to the part that makes it clean.</li>
+      </ul>
+      <p class="success">You have finished this step when you have made your plane.</p>
+      <p class="teacher">Provide junk materials. Keep it playful and quick.</p>
+    </div>
+    <div class="step-panel" id="ks1-s4" role="tabpanel" aria-labelledby="ks1-t4" tabindex="0" hidden>
+      <h3>Try It</h3>
+      <p class="kids">Show your plane and see what people think.</p>
+      <ul class="do-list">
+        <li>Show a friend and ask: does it look clean? do you like it?</li>
+        <li>Give your friend a happy comment about their plane.</li>
+      </ul>
+      <p class="success">You have finished this step when a friend has seen your plane.</p>
+      <p class="teacher">Model kind comments: I like...</p>
+    </div>
+    <div class="step-panel" id="ks1-s5" role="tabpanel" aria-labelledby="ks1-t5" tabindex="0" hidden>
+      <h3>Make It Better</h3>
+      <p class="kids">Change one thing to make your plane even better.</p>
+      <ul class="do-list">
+        <li>Add or change one thing on your plane.</li>
+        <li>Say what you made better.</li>
+      </ul>
+      <p class="success">You have finished this step when you have made one thing better.</p>
+      <p class="teacher">One change only. Ask the child to say the improvement out loud.</p>
+    </div>
+    <div class="step-panel" id="ks1-s6" role="tabpanel" aria-labelledby="ks1-t6" tabindex="0" hidden>
+      <h3>Show It</h3>
+      <p class="kids">Show your Clean Sky Plane to the class and say who it helps.</p>
+      <ul class="do-list">
+        <li>Show your plane in a show and tell.</li>
+        <li>Say: my clean plane helps keep the air clean.</li>
+      </ul>
+      <p class="success">You have finished this step when you have shown your plane to the class.</p>
+      <p class="teacher">Invite a buddy class as the audience.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="p-lks2" role="tabpanel" aria-labelledby="tab-lks2" tabindex="0" hidden>
+    <h2>Lower KS2 (Years 3 to 4)</h2>
+    <div class="brief">
+      <h3>Your project</h3>
+      <p>You are a young engineer. Design and make a <strong>glider that flies with no engine and no fuel at all</strong>, so it makes no pollution.</p>
+    </div>
+    <div class="step-nav" role="tablist" aria-label="Design journey for Lower KS2">
+      <button class="step-btn" role="tab" aria-selected="true" aria-controls="lks2-s1" id="lks2-t1" tabindex="0"><span class="num">1</span>Define</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="lks2-s2" id="lks2-t2" tabindex="-1"><span class="num">2</span>Ideate</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="lks2-s3" id="lks2-t3" tabindex="-1"><span class="num">3</span>Prototype</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="lks2-s4" id="lks2-t4" tabindex="-1"><span class="num">4</span>Test</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="lks2-s5" id="lks2-t5" tabindex="-1"><span class="num">5</span>Iterate</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="lks2-s6" id="lks2-t6" tabindex="-1"><span class="num">6</span>Showcase</button>
+    </div>
+    <div class="step-panel" id="lks2-s1" role="tabpanel" aria-labelledby="lks2-t1" tabindex="0">
+      <h3>Define the problem</h3>
+      <p class="kids">Engines that burn fuel pollute the air. A glider flies with no engine at all. Work out what makes a glider fly well.</p>
+      <ul class="do-list">
+        <li>Talk about why a glider with no fuel is kinder to the air.</li>
+        <li>Agree three things your glider must do, for example fly straight and land safely (your criteria).</li>
+      </ul>
+      <p class="success">You have finished this step when you have three clear criteria.</p>
+      <p class="teacher">Co-build criteria. Sentence stem: A good glider will...</p>
+    </div>
+    <div class="step-panel" id="lks2-s2" role="tabpanel" aria-labelledby="lks2-t2" tabindex="0" hidden>
+      <h3>Ideate</h3>
+      <p class="kids">Think of different glider shapes and wings before you choose one.</p>
+      <ul class="do-list">
+        <li>Sketch at least three glider designs with different wings.</li>
+        <li>Choose one design and say why.</li>
+      </ul>
+      <p class="success">You have finished this step when you have chosen one design and can say why.</p>
+      <p class="teacher">Encourage varied wing shapes. Quick vote against the criteria.</p>
+    </div>
+    <div class="step-panel" id="lks2-s3" role="tabpanel" aria-labelledby="lks2-t3" tabindex="0" hidden>
+      <h3>Prototype</h3>
+      <p class="kids">Make your glider from paper or light junk materials. Rough is fine.</p>
+      <ul class="do-list">
+        <li>Build your glider.</li>
+        <li>Label the wings and the nose.</li>
+      </ul>
+      <p class="success">You have finished this step when you have a glider you can test.</p>
+      <p class="teacher">Paper, straws and light card. Keep spares ready.</p>
+    </div>
+    <div class="step-panel" id="lks2-s4" role="tabpanel" aria-labelledby="lks2-t4" tabindex="0" hidden>
+      <h3>Test</h3>
+      <p class="kids">Fly your glider and see how it does against your criteria.</p>
+      <ul class="do-list">
+        <li>Fly it three times and record how far and how straight it goes.</li>
+        <li>Ask a partner for one thing that works and one to improve.</li>
+      </ul>
+      <p class="success">You have finished this step when you have flown it more than once and have results.</p>
+      <p class="teacher">Fair test talk: launch it the same way each time.</p>
+    </div>
+    <div class="step-panel" id="lks2-s5" role="tabpanel" aria-labelledby="lks2-t5" tabindex="0" hidden>
+      <h3>Iterate</h3>
+      <p class="kids">Use what you saw to make it fly better.</p>
+      <ul class="do-list">
+        <li>Make two changes, for example fold the wings or add a small weight.</li>
+        <li>Say what changed and whether it helped.</li>
+      </ul>
+      <p class="success">You have finished this step when your glider meets more of your criteria.</p>
+      <p class="teacher">Compare before and after distances to show the point of iterating.</p>
+    </div>
+    <div class="step-panel" id="lks2-s6" role="tabpanel" aria-labelledby="lks2-t6" tabindex="0" hidden>
+      <h3>Enterprise Showcase</h3>
+      <p class="kids">Share your glider and explain why no fuel means cleaner air.</p>
+      <ul class="do-list">
+        <li>Show your glider in a class poster or a short talk.</li>
+        <li>Explain how it links to SDG 7.</li>
+      </ul>
+      <p class="success">You have finished this step when you have shared it and linked it to the SDG.</p>
+      <p class="teacher">Poster template: problem, idea, who it helps.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="p-uks2" role="tabpanel" aria-labelledby="tab-uks2" tabindex="0" hidden>
+    <h2>Upper KS2 (Years 5 to 6)</h2>
+    <div class="brief">
+      <h3>Your project</h3>
+      <p>You are an aircraft engineer. Design a <strong>small aircraft powered by clean energy</strong>, such as batteries charged by the sun, and show how it gets its power.</p>
+    </div>
+    <div class="step-nav" role="tablist" aria-label="Design journey for Upper KS2">
+      <button class="step-btn" role="tab" aria-selected="true" aria-controls="uks2-s1" id="uks2-t1" tabindex="0"><span class="num">1</span>Define</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="uks2-s2" id="uks2-t2" tabindex="-1"><span class="num">2</span>Ideate</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="uks2-s3" id="uks2-t3" tabindex="-1"><span class="num">3</span>Prototype</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="uks2-s4" id="uks2-t4" tabindex="-1"><span class="num">4</span>Test</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="uks2-s5" id="uks2-t5" tabindex="-1"><span class="num">5</span>Iterate</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="uks2-s6" id="uks2-t6" tabindex="-1"><span class="num">6</span>Showcase</button>
+    </div>
+    <div class="step-panel" id="uks2-s1" role="tabpanel" aria-labelledby="uks2-t1" tabindex="0">
+      <h3>Define the problem</h3>
+      <p class="kids">Burning fuel pollutes. Clean energy like batteries or solar power can drive small aircraft. Work out what your clean aircraft must do.</p>
+      <ul class="do-list">
+        <li>Discuss clean energy sources for flight (battery, solar) and who benefits.</li>
+        <li>Write a clear problem and agree three criteria.</li>
+      </ul>
+      <p class="success">You have finished this step when you can say who you help and you have three criteria.</p>
+      <p class="teacher">Introduce energy sources simply. Co-build the criteria.</p>
+    </div>
+    <div class="step-panel" id="uks2-s2" role="tabpanel" aria-labelledby="uks2-t2" tabindex="0" hidden>
+      <h3>Ideate</h3>
+      <p class="kids">Think of many designs and clean power ideas, then choose one.</p>
+      <ul class="do-list">
+        <li>Sketch at least five ideas showing how each is powered cleanly.</li>
+        <li>Choose one and explain how it meets your criteria.</li>
+      </ul>
+      <p class="success">You have finished this step when you have chosen one idea and can justify it.</p>
+      <p class="teacher">Use a decision grid against the criteria.</p>
+    </div>
+    <div class="step-panel" id="uks2-s3" role="tabpanel" aria-labelledby="uks2-t3" tabindex="0" hidden>
+      <h3>Prototype</h3>
+      <p class="kids">Build a model that shows your aircraft and where its clean power comes from.</p>
+      <ul class="do-list">
+        <li>Make a cardboard or Lego model, or a labelled diagram.</li>
+        <li>Show clearly where the battery or solar panel goes.</li>
+      </ul>
+      <p class="success">You have finished this step when you have a model or labelled design to test.</p>
+      <p class="teacher">Keep the power system visible and central.</p>
+    </div>
+    <div class="step-panel" id="uks2-s4" role="tabpanel" aria-labelledby="uks2-t4" tabindex="0" hidden>
+      <h3>Test</h3>
+      <p class="kids">Check your design against your criteria and gather feedback.</p>
+      <ul class="do-list">
+        <li>Score your design against each criterion.</li>
+        <li>Get peer feedback: one strength and one improvement.</li>
+      </ul>
+      <p class="success">You have finished this step when you have results for all criteria and some feedback.</p>
+      <p class="teacher">Use a kind, specific critique protocol.</p>
+    </div>
+    <div class="step-panel" id="uks2-s5" role="tabpanel" aria-labelledby="uks2-t5" tabindex="0" hidden>
+      <h3>Iterate</h3>
+      <p class="kids">Improve your design using what you learned.</p>
+      <ul class="do-list">
+        <li>Make at least two improvements and record why.</li>
+        <li>Explain how the changes help you meet your criteria.</li>
+      </ul>
+      <p class="success">You have finished this step when your design meets more criteria than before.</p>
+      <p class="teacher">Capture before and after to value the testing.</p>
+    </div>
+    <div class="step-panel" id="uks2-s6" role="tabpanel" aria-labelledby="uks2-t6" tabindex="0" hidden>
+      <h3>Enterprise Showcase</h3>
+      <p class="kids">Pitch your clean aircraft and explain the difference it makes.</p>
+      <ul class="do-list">
+        <li>Give a group presentation or poster.</li>
+        <li>Explain how it supports SDG 7 and who it helps.</li>
+      </ul>
+      <p class="success">You have finished this step when you have presented and linked to the SDG.</p>
+      <p class="teacher">Invite an audience, a STEM ambassador if possible.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="p-ks3" role="tabpanel" aria-labelledby="tab-ks3" tabindex="0" hidden>
+    <h2>KS3 (Years 7 to 9)</h2>
+    <div class="brief">
+      <h3>Your project</h3>
+      <p>Design and model an <strong>electric or solar-assisted drone</strong> for a real job (for example crop monitoring or medical delivery), and reason about the energy trade-offs of powering it cleanly.</p>
+    </div>
+    <div class="step-nav" role="tablist" aria-label="Design journey for KS3">
+      <button class="step-btn" role="tab" aria-selected="true" aria-controls="ks3-s1" id="ks3-t1" tabindex="0"><span class="num">1</span>Define</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks3-s2" id="ks3-t2" tabindex="-1"><span class="num">2</span>Ideate</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks3-s3" id="ks3-t3" tabindex="-1"><span class="num">3</span>Prototype</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks3-s4" id="ks3-t4" tabindex="-1"><span class="num">4</span>Test</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks3-s5" id="ks3-t5" tabindex="-1"><span class="num">5</span>Iterate</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks3-s6" id="ks3-t6" tabindex="-1"><span class="num">6</span>Showcase</button>
+    </div>
+    <div class="step-panel" id="ks3-s1" role="tabpanel" aria-labelledby="ks3-t1" tabindex="0">
+      <h3>Define</h3>
+      <p class="kids">Drones can do useful jobs, but how they are powered matters for the environment. Define a real job and the requirements for a cleanly powered drone.</p>
+      <ul class="do-list">
+        <li>Research one useful drone job and its needs (range, payload, flight time).</li>
+        <li>List requirements and constraints, including a clean energy source.</li>
+      </ul>
+      <p class="success">You have finished this step when you have clear requirements and constraints.</p>
+      <p class="teacher">Link to real aerospace roles and check sources.</p>
+    </div>
+    <div class="step-panel" id="ks3-s2" role="tabpanel" aria-labelledby="ks3-t2" tabindex="0" hidden>
+      <h3>Ideate</h3>
+      <p class="kids">Generate concepts, then screen them against your requirements.</p>
+      <ul class="do-list">
+        <li>Use a mind map or SCAMPER to generate concepts.</li>
+        <li>Select one using a simple decision grid.</li>
+      </ul>
+      <p class="success">You have finished this step when you have a justified chosen concept.</p>
+      <p class="teacher">Weighted criteria introduce trade-offs early.</p>
+    </div>
+    <div class="step-panel" id="ks3-s3" role="tabpanel" aria-labelledby="ks3-t3" tabindex="0" hidden>
+      <h3>Prototype</h3>
+      <p class="kids">Model your drone using CAD, Tinkercad or a coded simulation, and keep a build log.</p>
+      <ul class="do-list">
+        <li>Create a CAD or coded model of the drone and its power system.</li>
+        <li>Record design decisions in a build log.</li>
+      </ul>
+      <p class="success">You have finished this step when you have a model and a build log.</p>
+      <p class="teacher">Tinkercad or block/text code depending on your kit.</p>
+    </div>
+    <div class="step-panel" id="ks3-s4" role="tabpanel" aria-labelledby="ks3-t4" tabindex="0" hidden>
+      <h3>Test</h3>
+      <p class="kids">Test fairly, collect data and compare options.</p>
+      <ul class="do-list">
+        <li>Run fair tests (for example glide, lift or energy use) and record data.</li>
+        <li>Compare at least two options in a table.</li>
+      </ul>
+      <p class="success">You have finished this step when you have data comparing options.</p>
+      <p class="teacher">Emphasise controlled variables.</p>
+    </div>
+    <div class="step-panel" id="ks3-s5" role="tabpanel" aria-labelledby="ks3-t5" tabindex="0" hidden>
+      <h3>Iterate</h3>
+      <p class="kids">Iterate from the data and show before and after.</p>
+      <ul class="do-list">
+        <li>Make evidence-led changes and re-test.</li>
+        <li>Show before and after results and explain them.</li>
+      </ul>
+      <p class="success">You have finished this step when your data shows improvement.</p>
+      <p class="teacher">The iteration log is evidence of the process.</p>
+    </div>
+    <div class="step-panel" id="ks3-s6" role="tabpanel" aria-labelledby="ks3-t6" tabindex="0" hidden>
+      <h3>Enterprise Showcase</h3>
+      <p class="kids">Pitch your drone with a clear rationale linked to SDG 7.</p>
+      <ul class="do-list">
+        <li>Deliver a pitch with your rationale and data.</li>
+        <li>Explain the clean energy trade-offs you accepted.</li>
+      </ul>
+      <p class="success">You have finished this step when you have pitched with evidence and an SDG link.</p>
+      <p class="teacher">Careers and enterprise framing, with a short Q&A.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="p-ks4" role="tabpanel" aria-labelledby="tab-ks4" tabindex="0" hidden>
+    <h2>KS4 (Years 10 to 11)</h2>
+    <div class="brief">
+      <h3>Your project</h3>
+      <p>Design a <strong>costed concept to power a short regional aircraft route with cleaner energy</strong> (battery, hydrogen or sustainable fuel). Justify your energy choice with evidence and evaluate feasibility and impact.</p>
+    </div>
+    <div class="step-nav" role="tablist" aria-label="Design journey for KS4">
+      <button class="step-btn" role="tab" aria-selected="true" aria-controls="ks4-s1" id="ks4-t1" tabindex="0"><span class="num">1</span>Define</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks4-s2" id="ks4-t2" tabindex="-1"><span class="num">2</span>Ideate</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks4-s3" id="ks4-t3" tabindex="-1"><span class="num">3</span>Prototype</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks4-s4" id="ks4-t4" tabindex="-1"><span class="num">4</span>Test</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks4-s5" id="ks4-t5" tabindex="-1"><span class="num">5</span>Iterate</button>
+      <button class="step-btn" role="tab" aria-selected="false" aria-controls="ks4-s6" id="ks4-t6" tabindex="-1"><span class="num">6</span>Showcase</button>
+    </div>
+    <div class="step-panel" id="ks4-s1" role="tabpanel" aria-labelledby="ks4-t1" tabindex="0">
+      <h3>Define</h3>
+      <p class="kids">Short regional routes are a realistic first target for cleaner aviation. Define the problem precisely with measurable requirements.</p>
+      <ul class="do-list">
+        <li>Research the route type and its energy demands.</li>
+        <li>Write measurable requirements and success criteria.</li>
+      </ul>
+      <p class="success">You have finished this step when you have measurable requirements and criteria.</p>
+      <p class="teacher">Link to GCSE specifications and precise problem framing.</p>
+    </div>
+    <div class="step-panel" id="ks4-s2" role="tabpanel" aria-labelledby="ks4-t2" tabindex="0" hidden>
+      <h3>Ideate</h3>
+      <p class="kids">Generate and screen concepts against weighted criteria, then justify your choice.</p>
+      <ul class="do-list">
+        <li>Generate several clean-power concepts (battery, hydrogen, sustainable fuel).</li>
+        <li>Screen against weighted criteria and justify the chosen concept.</li>
+      </ul>
+      <p class="success">You have finished this step when you have a justified concept from a weighted screen.</p>
+      <p class="teacher">Use a decision matrix and evidence-based justification.</p>
+    </div>
+    <div class="step-panel" id="ks4-s3" role="tabpanel" aria-labelledby="ks4-t3" tabindex="0" hidden>
+      <h3>Prototype</h3>
+      <p class="kids">Produce a CAD, coded or costed model with notes on materials and choices.</p>
+      <ul class="do-list">
+        <li>Model the concept (CAD or coded) and outline the power system.</li>
+        <li>Note key materials, choices and an indicative cost.</li>
+      </ul>
+      <p class="success">You have finished this step when you have a model with costed choices.</p>
+      <p class="teacher">Bring in feasibility and cost thinking from the outset.</p>
+    </div>
+    <div class="step-panel" id="ks4-s4" role="tabpanel" aria-labelledby="ks4-t4" tabindex="0" hidden>
+      <h3>Test</h3>
+      <p class="kids">Run controlled quantitative tests, analyse the results and note limitations.</p>
+      <ul class="do-list">
+        <li>Test key variables quantitatively and record data.</li>
+        <li>Analyse the results and state the limitations honestly.</li>
+      </ul>
+      <p class="success">You have finished this step when you have analysed quantitative results.</p>
+      <p class="teacher">Data handling, uncertainty and limitations.</p>
+    </div>
+    <div class="step-panel" id="ks4-s5" role="tabpanel" aria-labelledby="ks4-t5" tabindex="0" hidden>
+      <h3>Iterate</h3>
+      <p class="kids">Optimise, justify each change with evidence, and reflect on trade-offs.</p>
+      <ul class="do-list">
+        <li>Optimise the design and justify each change with data.</li>
+        <li>Reflect on the trade-offs you accepted (cost, range, emissions).</li>
+      </ul>
+      <p class="success">You have finished this step when your design is optimised with justified changes.</p>
+      <p class="teacher">Trade-off analysis is the key skill here.</p>
+    </div>
+    <div class="step-panel" id="ks4-s6" role="tabpanel" aria-labelledby="ks4-t6" tabindex="0" hidden>
+      <h3>Enterprise Showcase</h3>
+      <p class="kids">Deliver a costed enterprise pitch with evidence, feasibility and impact.</p>
+      <ul class="do-list">
+        <li>Present a costed pitch with feasibility and impact.</li>
+        <li>Quantify the emissions saving and link it to SDG 7 and SDG 13.</li>
+      </ul>
+      <p class="success">You have finished this step when you have delivered a costed, evidenced pitch.</p>
+      <p class="teacher">Authentic audience with enterprise and pitching skills.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>AeroSTEM Innovation Challenge &middot; a whole-school STEM project using the design thinking cycle.</p>
+  </div>
+</footer>
+
+<script>
+/* Generic, accessible tablist controller.
+   Works for the section tabs and for each section's step-nav.
+   Follows the WAI-ARIA tabs pattern: click to select, arrow keys to move,
+   Home and End to jump, roving tabindex, and focus follows selection. */
+(function(){
+  function wireTablist(tablist){
+    var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
+    function select(tab, focus){
+      tabs.forEach(function(t){
+        var selected = t === tab;
+        t.setAttribute('aria-selected', selected ? 'true' : 'false');
+        t.tabIndex = selected ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if(panel){ if(selected){ panel.hidden = false; } else { panel.hidden = true; } }
+      });
+      if(focus){ tab.focus(); }
+    }
+    tabs.forEach(function(tab, i){
+      tab.addEventListener('click', function(){ select(tab, false); });
+      tab.addEventListener('keydown', function(e){
+        var idx = i;
+        if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){ idx = (i + 1) % tabs.length; }
+        else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ idx = (i - 1 + tabs.length) % tabs.length; }
+        else if(e.key === 'Home'){ idx = 0; }
+        else if(e.key === 'End'){ idx = tabs.length - 1; }
+        else { return; }
+        e.preventDefault();
+        select(tabs[idx], true);
+      });
+    });
+  }
+  // Wire every tablist on the page (section tabs + all step-navs).
+  Array.prototype.slice.call(document.querySelectorAll('[role="tablist"]')).forEach(wireTablist);
+})();
+</script>
+</body>
+</html>
